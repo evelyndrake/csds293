@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="638c7cea-4d5e-4e56-8b1b-9d8997d50811" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2lsyEqhFxT6SOKQH3VzLI3SL9OL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "full.screen.before.presentation.mode": "false",
+    "last_opened_file_path": "/Users/julian/IdeaProjects/Software Craftsmanship HW 3/untitled",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../../Software Craftsmanship HW 5" />
+      <recent name="$PROJECT_DIR$/../../Software Craftsmanship HW 4/untitled/res" />
+      <recent name="$PROJECT_DIR$/../../Software Craftsmanship HW 4" />
+      <recent name="$PROJECT_DIR$/res" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="dev.evelyn.taskscheduler.metrics" />
+      <recent name="dev.evelyn.taskscheduler.tasks" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="dev.evelyn.taskscheduler" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.RemoteServerTest.testMultipleServers">
+    <configuration name="RemoteServerTest.testBothServerTypes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="taskscheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.evelyn.taskscheduler.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.evelyn.taskscheduler.tests" />
+      <option name="MAIN_CLASS_NAME" value="dev.evelyn.taskscheduler.tests.RemoteServerTest" />
+      <option name="METHOD_NAME" value="testBothServerTypes" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RemoteServerTest.testMultipleServers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="taskscheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.evelyn.taskscheduler.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.evelyn.taskscheduler.tests" />
+      <option name="MAIN_CLASS_NAME" value="dev.evelyn.taskscheduler.tests.RemoteServerTest" />
+      <option name="METHOD_NAME" value="testMultipleServers" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RemoteServerTest.testProcessTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="taskscheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.evelyn.taskscheduler.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.evelyn.taskscheduler.tests" />
+      <option name="MAIN_CLASS_NAME" value="dev.evelyn.taskscheduler.tests.RemoteServerTest" />
+      <option name="METHOD_NAME" value="testProcessTask" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RemoteServerTest.testProcessTask_InterruptedException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="taskscheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.evelyn.taskscheduler.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.evelyn.taskscheduler.tests" />
+      <option name="MAIN_CLASS_NAME" value="dev.evelyn.taskscheduler.tests.RemoteServerTest" />
+      <option name="METHOD_NAME" value="testProcessTask_InterruptedException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RemoteServerTest.testWithScheduler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="taskscheduler" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.evelyn.taskscheduler.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.evelyn.taskscheduler.tests" />
+      <option name="MAIN_CLASS_NAME" value="dev.evelyn.taskscheduler.tests.RemoteServerTest" />
+      <option name="METHOD_NAME" value="testWithScheduler" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run all tests" type="JUnit" factoryName="JUnit">
+      <module name="taskscheduler" />
+      <option name="PACKAGE_NAME" value="dev.evelyn.taskscheduler.tests" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.Run all tests" />
+      <item itemvalue="JUnit.RemoteServerTest.testBothServerTypes" />
+      <item itemvalue="JUnit.RemoteServerTest.testMultipleServers" />
+      <item itemvalue="JUnit.RemoteServerTest.testProcessTask" />
+      <item itemvalue="JUnit.RemoteServerTest.testProcessTask_InterruptedException" />
+      <item itemvalue="JUnit.RemoteServerTest.testWithScheduler" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RemoteServerTest.testMultipleServers" />
+        <item itemvalue="JUnit.RemoteServerTest.testBothServerTypes" />
+        <item itemvalue="JUnit.RemoteServerTest.testWithScheduler" />
+        <item itemvalue="JUnit.RemoteServerTest.testProcessTask" />
+        <item itemvalue="JUnit.RemoteServerTest.testProcessTask_InterruptedException" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="638c7cea-4d5e-4e56-8b1b-9d8997d50811" name="Changes" comment="" />
+      <created>1725982970640</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725982970640</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.AssertionError" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
