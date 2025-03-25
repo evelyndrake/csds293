@@ -1,0 +1,73 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Ant
+/build/
+/dist/
+/report/
+/target/
+
+*.el
+*.ipr
+*.iws
+*.pif
+*.snap
+*.html
+.ant.properties
+*.properties
+.classpath
+.project
+.settings
+bin
+apache-ant-1.*
+bootstrap
+build
+dist
+distribution
+java-repository
+patch.tar.gz
+patch.txt
+target
+velocity.log*
+lib/optional/*.jar
+src/tests/antunit/core/output
+.idea
+*.iml
+/src/GPATH
+/src/GRTAGS
+/src/GSYMS
+/src/GTAGS
+/log.xml
+lib/optional/license.txt
+/release/distrib/
+report/
+build/
+/report/
+/build/

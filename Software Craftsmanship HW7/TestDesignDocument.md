@@ -1,0 +1,336 @@
+# Test Design Document
+**Improved tests and error handling**
+
+Evelyn Drake - HW 11 - 11/22/24
+- For this assignment, I only had to create a few new tests as I did not drastically change any fundamental functionality of the program
+- I spent the majority of my effort on making the error handling more robust as discussed last week
+- I moved classes into packages accordingly: `exceptions`, `socialnetwork`, `tests`
+- I created 3 new exception classes:
+  - `IllegalLineException`
+    - This exception is thrown when a malformed line is given to the `SocialNetworkParser` class
+  - `NetworkOperationException`
+    - This exception is thrown from the `SocialNetwork` class when an operation fails
+    - Exceptions thrown in the `Person` class are passed up to this class, and `NetworkOperationException`s are thrown when the error cannot be gracefully handled
+  - `PersonOperationException`
+    - This exception is thrown from the `Person` class when an operation fails
+- I created an `ExceptionHandler` class
+  - This is a static class that takes exceptions as inputs
+  - It takes the three new exceptions as well as other exceptions that are thrown in the program (`IllegalArgumentException`, `NumberFormatException`, etc.)
+  - It has configurable boolean variables to enable/disable logging and enable/disable stack trace printing
+  - It also has a `displayWarning` function which takes a message and logs it, centralizing logging and removing the need for individual `Logger` classes in the other classes
+- I refactored the existing tests to ensure exceptions are thrown when necessary:
+```java
+try {
+    network.removeConnection(1, 2);
+    assert false;
+} catch (NetworkOperationException e) {
+    assert true;
+}
+```
+- To achieve 100% coverage, I needed to create another test class for the exception handler: `ExceptionHandlerTest`
+  - `ExceptionHandler()`
+    - Test T1 - `testConstructor`
+      - This test just tests the constructor method
+      - Although it is a static class, this needs to be done to achieve 100% coverage
+  - `handleException(Exception e)`
+    - Condition TC1 - Verify that exceptions are handled correctly
+    - Test T2 - `testHandleException`
+      - Conditions - TC1
+      - Assertions
+        - Passing in an exception should display the stack trace (if enabled) and the message (if enabled)
+        - Passing in a null exception throws a NullPointerException
+  - `displayWarning(String message)`
+    - Condition TC2 - Verify that message logging is handled correctly
+    - Test T3 - `testDisplayWarning`
+      - Conditions - TC2
+      - Assertions
+        - Passing in a String should display the message (if enabled)
+        - Passing in a null String throws a NullPointerException
+
+# Test Design Document
+**Parsing functionality**
+
+Evelyn Drake - HW 8 - 11/15/24
+### SocialNetworkParser.java
+- `parse(InputStream input)`
+  - Condition TC1
+    - Goal - Verify that input is parsed correctly
+    - Conditions
+      - If the input starts with P, it will call `parsePerson`
+      - If the input starts with C, it will call `parseConnection`
+      - Otherwise, it will log a warning stating that the line was invalid
+  - Test T1 - `testValidLineType`
+    - Conditions - TC1
+    - Assertions
+      - Parsing a line starting with P calls `parsePerson`
+      - Parsing a line starting with C calls `parseConnection`
+  - Test T2 - `testInvalidLineType`
+    - Conditions - TC1
+    - Assertions
+      - Parsing a line starting with D does not add any person or connection to the network
+      - If a line is invalid, no changes are made and a warning is logged
+- `parsePerson(String line)`
+  - Condition TC2
+    - Goal - Verify that person lines are parsed and behave correctly
+    - Conditions
+      - Parsing a string with less than or more than 3 parts does nothing
+      - Parsing a string that adds a person will create and add a person to the network if it meets the criteria specified in `SocialNetwork`, otherwise it does nothing
+      - Parsing a string where the given IDs are not integers will throw a `NumberFormatException`
+  - Test T3 - `testValidPersonLine`
+    - Conditions - TC2
+    - Assertions
+      - Parsing a valid person line adds a person with the given name and ID to the network
+  - Test T4 - `testInvalidPersonLine`
+    - Conditions - TC2
+    - Assertions
+      - Attempting to add a person that already exists will fail
+      - Attempting to add a person with an ID that is not an integer will fail
+- `parseConnection(String line)`
+  - Condition TC3
+    - Goal - Verify that connection lines are parsed and behave correctly
+    - Conditions
+      - Parsing a string with less than or more than 3 parts does nothing
+      - Parsing a string that adds a connection will add a connection to the network if it meets the criteria specified in `SocialNetwork`, otherwise it does nothing
+      - Parsing a string where the given IDs are not integers will throw a `NumberFormatException`
+  - Test T5 - `testValidConnectionLine`
+    - Conditions - TC3
+    - Assertions
+      - Parsing a valid connection line adds a connection between the given people to the network
+  - Test T6 - `testInvalidXonnectionLine`
+    - Conditions - TC3
+    - Assertions
+      - Attempting to add a connection twice will fail
+      - Attempting to add a connection between people that do not exist will fail
+      - Attempting to add a connection with IDs that are not integers will fail
+- Stress test
+  - Condition TC4
+    - Goal - Verify that the parsing of people and connections works with a large amount of data
+    - Conditions
+      - Parsing a string containing 1000 people will add all 1000 people to the network
+      - Parsing a string containing 1000 connections will add all 1000 connections to the network
+  - Test T7 - `stressTest`
+    - Conditions - TC4
+    - Assertions
+      - Attempting to add 1000 people to the network will succeed, giving the network a size of 1000
+      - Attempting to connect the 1000 added people will succeed, and each person with ID `i` will be connected to the person with ID `i+1`
+# Test Design Document
+**Original solution**
+
+Evelyn Drake - HW 8 - 10/25/24
+### Person.java
+- `isConnectedTo(Person person)`
+  - Condition TC1
+    - Goal - Verify if `isConnectedTo` correctly identifies when two people are connected
+    - Conditions
+      - If person A is connected to person B, it should return true
+      - If person A is not connected to person C, it should return false
+  - Test T1 - `testIsConnectedTo`
+    - Conditions - TC1
+    - Assertions
+      - `isConnectedTo(Person B)` returns true
+      - `isConnectedTo(Person C)` returns false
+- `isConnectedTo(int id)`
+  - Condition TC2
+    - Goal - Verify if `isConnectedTo` correctly checks connections based on the person's ID
+    - Conditions
+      - If person A (ID 1) is connected to person B (ID 2), it should return true
+      - If person A (ID 1) is not connected to person B (ID 3), it should return false
+  - Test T2 - `testIsConnectedToWithId`
+  - Conditions - TC 2
+    - Assertions
+      - `isConnectedTo(2)` returns true
+      - `isConnectedTo(3)` returns false
+- `addConnection(Person person)`
+  - Condition TC 3
+    - Goal - Verify that adding a connection between two people works correctly
+    - Conditions
+      - Adding a new connection between person A and person B should succeed
+      - Adding a duplicate connection between person A and B should fail
+  - Test T3 - `testAddConnection`
+    - Conditions - TC 3
+    - Assertions
+      - `addConnection(Person B)` returns true on the first attempt
+      - Person A and Person B share a connection
+  - Test T4 - `testAddDuplicateConnection`
+    - Conditions - TC 3
+    - Assertions
+      - `addConnection(Person B)` returns false on the second attempt
+      - Test A and B still share a connection, but a second one was not added
+- `removeConnection(Person person)`
+  - Condition TC5
+    - Goal - Verify that removing a connection between two people works correctly
+    - Conditions
+      - Removing an existing connection between person A and person B should succeed, returning true
+      - Trying to remove a non-existent connection should fail
+  - Test T5 - `testRemoveConnection`
+    - Conditions - TC5
+    - Assertions
+      - Removing an existing connection should make `isConnectedTo` return false for both people
+  - Test T6 - `testRemoveNonexistentConnection`
+    - Conditions - TC5
+    - Assertions
+      - Attempting to remove a nonexistent connection between person A and person B should return false
+  - Test T7 - `testRemoveConnectionTwice`
+    - Conditions - TC5
+    - Assertions
+      - Attempting to remove an existing connection between person A and person B should succeed the first time, returning true
+      - Attempting to remove this connection again should fail, returning false
+- `getId`
+  - Trivial, can be omitted per assignment instructions
+  - Test T8 - `testGetId`
+- `getName`
+  - Trivial, can be omitted per assignment instructions
+  - Test T9 - `testGetName`
+- `getConnections`
+  - Condition TC6
+    - Goal - Verify that the list of a person's connections is returned properly
+    - Conditions
+      - Returning the connections of a person with connections should return a list containing the ids of all connections
+      - Returning the connections of a person with on connections should return an empty list
+  - Test T10
+    - Conditions - TC6
+    - Assertions
+      - Getting the list of connections of person A, who has connections, should return a list containing all connected ids
+      - Getting the list of connections of person B, who has no connections, should return a list of size 0
+### SocialNetwork.java
+- `createAndAddPerson(int id, String name)`
+  - Condition TC1
+    - Goal - Verify that creating and adding a person to the social network works as expected
+    - Conditions
+      - Adding a new person with a unique ID should succeed
+      - Attempting to add a person with a duplicate ID should fail
+  - Test T1 - `createAndAddPerson`
+    - Conditions - TC1
+    - Assertions
+      - Adding a person with a unique ID (1) should return true
+      - Adding a person with ID 1 again should return false
+- `addConnection(int id1, int id2)`
+  - Condition TC2
+    - Goal - Verify that adding a connection between two people in the network works as expected
+    - Conditions
+      - Adding a connection between two existing people should succeed
+      - Attempting to add a connection with one or both invalid IDs should fail
+      - Attempting to add a duplicate connection should fail
+  - Test T2 - `testAddConnection`
+    - Conditions - TC2
+    - Assertions
+      - Adding a connection between two valid IDs should return true
+  - Test T3 - `testAddConnectionWithInvalidId`
+    - Conditions - TC2
+    - Assertions
+      - Adding a connection between a person with a valid ID and a person with an invalid ID should fail
+      - Adding a connection between a person with an invalid ID and a person with a valid ID should fail
+      - Adding a connection between two people with invalid IDs should fail
+  - Test T4 - `testAddDuplicateConnection`
+    - Conditions - TC 2
+    - Assertions
+      - Adding a connection between two unconnected people with valid IDs for the first time should return true
+      - Adding a connection between these people again should return false
+- `removeConnection(int id1, int id2)`
+  - Condition TC3
+    - Goal - Verify that removing a connection between two people works as expected
+    - Conditions
+      - Removing a connection between two connected people should succeed
+      - Attempting to remove a connection with one or both invalid IDs should fail
+      - Attempting to remove a nonexistent connection should fail
+  - Test T5 - `testRemoveConnection`
+    - Conditions - TC3
+    - Assertions
+      - Removing a connection between two connected people should return true
+      - After the connection is removed, both people should not be connected anymore
+  - Test T6 - `testRemoveConnectionWithInvalidId`
+    - Conditions - TC3
+    - Assertions
+      - Removing a connection between a person with a valid ID and a person with an invalid ID should fail
+      - Removing a connection between a person with an invalid ID and a person with a valid ID should fail
+      - Removing a connection between two people with invalid IDs should fail
+  - Test T7 ` testRemoveNonexistentConnection`
+    - Conditions - TC3
+    - Assertions
+      - Removing a connection between two people who aren't connected should fail
+### NetworkAnalyzer.java
+- `findInfluencers(int k)`
+  - Condition TC1
+    - Goal - Verify that finding the top k influencers in the network works as expected
+    - Conditions
+      - The method should return the top k influencers if they exist
+      - The method should return an empty list if there are no people in the network
+  - Test T1 - `testFindInfluencers`
+    - Conditions - TC1
+    - Assertions
+      - Finding the top 1 influencer should return the correct person
+      - Finding the top 2 influencers should return the correct top 2 people
+  - Test T2 - `testFindInfluencersWithNoPeople`
+    - Conditions - TC1
+    - Assertions
+      - Finding influencers when the network is empty should return an empty list
+      - Finding influencers when k < 0 should return an empty list
+      - Finding influencers when k = 0 should return an empty list
+- `shortestPath(int id1, int id2)`
+  - Condition TC3
+    - Goal - Verify that finding the shortest path between two people works as expected
+    - Conditions
+      - Finding a path between two connected people should succeed and return the correct shortest path
+      - Finding a path where there is no connection should fail, returning an empty list
+      - Finding a path with invalid IDs should fail, returning an empty list
+      - Finding a path between Person 1 and Person 3 should return a list only containing id1
+  - Test T3 - `testShortestPath`
+    - Conditions - TC3
+    - Assertions
+      - Finding the path between Person 1 and Person 3 should have a size of 2
+      - The first element should have an ID of 1
+      - The second element should have an ID of 3
+  - Test T4 - `testShortestPathWithNoPath`
+    - Conditions - TC3
+    - Assertions
+      - Finding the path between two unconnected people should return an empty list
+  - Test T5 - `testShortestPathWithNonexistentID`
+    - Conditions - TC3
+    - Assertions
+      - Finding the path between two nonexistent people should return an empty list
+  - Test T6 - `testShortestPathWithSameID`
+    - Conditions - TC3
+    - Assertions
+      - Finding the path between the Person 1 and Person 1 should return a list with size 1
+      - This list should have ID1 at index 0
+- `addPerson(int id, String name)`
+  - Trivial, wrapper for the exact same method tested in SocialNetwork
+  - Test T7 - `testAddPerson`
+- `addConnection(int id1, int id2)`
+  - Trivial, wrapper for the exact same method tested in SocialNetwork
+  - Test T8 - `testAddConnection`
+  - Test T9 - `testAddConnectionWithInvalidID`
+  - Test T10 - `testAddDuplicateConnection`
+- `removeConnection(int id1, int id2)`
+  - Trivial, wrapper for the exact same method tested in SocialNetwork
+  - Test T11 - `testRemoveConnection`
+  - Test T12 - `testRemoveConnectionWithInvalidID`
+  - Test T13 - `testRemoveNonexistentConnection`
+- `setNetwork`
+  - Condition TC4
+    - Goal - Ensure that setting the analyzer's network to a new network works as expected
+    - Conditions
+      - Setting the analyzer's network object to a new network sets the network object to the same object
+      - Setting the analyzer's network object to null returns an error and does not set it to null
+  - Test T14 - `testSetNetwork`
+    - Conditions - TC4
+    - Assertions
+      - Setting the network to a new network makes the analyzer's network and the network object equal
+  - Test T15 - `testSetNetworkWithNull`
+    - Conditions - TC4
+    - Assertions
+      - Setting the network to null throws a NullPointerException
+- Stress test
+  - Condition TC5
+    - Goal - Ensure that the `shortestPath` and `findInfluencers` methods work with large data sizes
+    - Conditions
+      - Adding 1000 people works correctly
+      - Adding 1000 connections between them works correctly
+      - Finding the shortest path from person 0 to person 999 works correctly
+      - Finding the top 100 influencers works correctly
+  - Test T16 - `stressTest`
+    - Conditions - TC5
+    - Assertions
+      - When each person is connected to every other person, the shortest path from person to 0 to person 999 is [0, 999]
+      - When each person is only connected to the next person, the shortest path from person 0 to person 999 has a length of 1000
+      - When finding the top 100 influencers, the algorithm returns the last 100 people
